@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package grpc_package;
+
+option go_package = "internal/grpc/generated;grpc_package";
+
+service CurrencyConverter {
+    rpc ConvertCurrency (CurrencyRequest) returns (CurrencyResponse);
+}
+
+message CurrencyRequest {
+    double amount = 1; // Сумма для конвертации
+    string from_currency = 2; // Исходная валюта (например, "USD")
+    string to_currency = 3; // Целевая валюта (например, "EUR")
+}
+
+message CurrencyResponse {
+    double converted_amount = 1; // Конвертированная сумма
+}
