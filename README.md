@@ -1,3 +1,4 @@
 # Сборник просых примеров gRPC
 Примеры:
- - *currency_converter* простой конвертор валют в режиме *unary*
+ - **currency_converter** простой конвертор валют в режиме *Unary RPC*
+ - **weather_service** погодный сервер и клиент для него. Сервер отправляет поток данных о погоде, режим *Server streaming RPC*
