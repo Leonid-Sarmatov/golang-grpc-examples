@@ -1,20 +1,24 @@
 package main
 
 import (
-	"log"
 	"context"
-	"fmt"
 	proto "currency_converter/client/internal/grpc/grpc_package"
+	"fmt"
+	"log"
+
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func main() {
 	// Устанавливаем соединение с сервером
-	conn, err := grpc.Dial("localhost:40001", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:40001", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Failed to connect to server: %v", err)
 	}
 	defer conn.Close()
+
+	log.Printf("Connection - OK\n")
 
 	client := proto.NewCurrencyConverterClient(conn)
 
@@ -26,6 +30,7 @@ func main() {
 	})
 	if err != nil {
 		log.Printf("Error converting currency: %v", err)
+	} else {
+		fmt.Printf("Converted amount: %.2f %s\n", response.ConvertedAmount, "USD")
 	}
-	fmt.Printf("Converted amount: %.2f %s\n", response.ConvertedAmount, "USD")
 }

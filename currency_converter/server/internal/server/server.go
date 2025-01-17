@@ -52,7 +52,7 @@ func (s *Server) Start() error {
 func (s *Server) Stop() error {
 	log.Println("Stopping gRPC server...")
 	s.grpcServer.GracefulStop()
-	return s.listener.Close()
+	return nil
 }
 
 /* 
