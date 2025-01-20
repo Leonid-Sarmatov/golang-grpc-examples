@@ -3,6 +3,7 @@ package server
 import (
 	"time"
 	proto "weather_service/server/internal/grpc_package"
+	service "weather_service/server/internal/service"
 
 	"log"
 	"net"
@@ -19,16 +20,7 @@ type Server struct {
 
 /* Интерфейс для системы определения погоды */
 type GetWeatherService interface {
-	GetWeatherInfo(sity string) (Weather, error)
-}
-
-/* Интерфейс для самой погоды */
-type Weather interface {
-	GetSityName() string
-	GetTemperature() float32
-	GetPercipitation() float32
-	GetWindSpeed() float32
-	GetCondition() string
+	GetWeatherInfo(sity string) (service.Weather, error)
 }
 
 /* Конструктор */
